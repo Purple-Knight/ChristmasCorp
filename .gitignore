@@ -48,9 +48,9 @@ SourceArt/**/*.tga
 # Binary Files
 Binaries/*
 Plugins/*/Binaries/*
-!/Binaries/Win64/EDTEditor.target
-!/Binaries/Win64/UnrealEditor.modules
-!/Binaries/Win64/UnrealEditor-EDT.dll
+!Binaries/Win64/EDTEditor.target
+!Binaries/Win64/UnrealEditor.modules
+!Binaries/Win64/UnrealEditor-EDT.dll
 
 # Builds
 Build/*

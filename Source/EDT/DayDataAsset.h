@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class EDT_API UDayDataAsset : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
