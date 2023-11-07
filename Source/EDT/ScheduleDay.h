@@ -12,10 +12,5 @@ struct EDT_API FScheduleDay
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FScheduleBlock> blocks;
-
-	FScheduleDay()
-	{
-		blocks = TArray<FScheduleBlock>();
-	}
+	TArray<TObjectPtr<AScheduleBlock>> Blocks;
 }; 

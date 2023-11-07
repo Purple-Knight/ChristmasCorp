@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "ScheduleDay.h"
 #include "GameManager.generated.h"
 
 UCLASS(Blueprintable, BlueprintType)
@@ -13,7 +14,10 @@ class EDT_API AGameManager : public AActor
 	
 public:	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int mentalHealth = 100;
+	int32 MentalHealth = 100;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 CurrentDay = 0;
 
 	// Sets default values for this actor's properties
 	AGameManager();
