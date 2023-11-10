@@ -31,7 +31,9 @@ void AScheduleBlock::GetBlockData()
 
 	if (BlockListInstance != nullptr)
 	{
-
+		BlockData.DisplayName = BlockListInstance->FindRow<FScheduleBlockData>(TEXT("Eat"), TEXT("Find data"))->DisplayName;
+		BlockData.Movable = BlockListInstance->FindRow<FScheduleBlockData>(TEXT("Eat"), TEXT("Find data"))->Movable;
+		UE_LOGFMT(LogTemp, Log, "Block data : DisplayName : {0} Movable : {1}", BlockData.DisplayName, BlockData.Movable);
 	}
 }
 
