@@ -7,10 +7,8 @@
 #include "ScheduleDay.generated.h"
 
 USTRUCT(BlueprintType)
-struct EDT_API FScheduleDay
+struct EDT_API FScheduleDay : public FTableRowBase
 {
 	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<TObjectPtr<AScheduleBlock>> Blocks;
-}; 
+	
+};

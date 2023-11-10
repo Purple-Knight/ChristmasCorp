@@ -5,6 +5,17 @@
 #include "CoreMinimal.h"
 #include "ScheduleBlock.generated.h"
 
+UENUM(BlueprintType)
+enum class EScheduleBlock : uint8
+{
+	EAT,
+	SLEEP,
+	PET_THE_CAT,
+	PLAY,
+	SLEEP_BUT_BETTER,
+	DIE
+};
+
 USTRUCT(BlueprintType)
 struct EDT_API FScheduleBlockData : public FTableRowBase
 {
@@ -13,9 +24,6 @@ struct EDT_API FScheduleBlockData : public FTableRowBase
 public:	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString DisplayName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 ImpactOnMentalHealth;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool Movable;
