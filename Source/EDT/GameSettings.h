@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DeveloperSettings.h"
+#include "ScheduleBlock.h"
 #include "GameSettings.generated.h"
 
 /**

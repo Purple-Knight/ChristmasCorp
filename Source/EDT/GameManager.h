@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "ScheduleDay.h"
 #include "GameManager.generated.h"
 
 UCLASS(Blueprintable, BlueprintType)

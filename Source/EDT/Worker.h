@@ -14,7 +14,7 @@ class EDT_API AWorker : public AActor
 	
 public:	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<TSubclassOf<AScheduleBlock>> Blocks;
+	TArray<TObjectPtr<UScheduleBlock>> Blocks;
 
 	// Sets default values for this actor's properties
 	AWorker();

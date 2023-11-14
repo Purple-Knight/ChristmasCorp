@@ -17,7 +17,6 @@ void AWorker::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOGFMT(LogTemp, Log, "Nb of blocks : {0}", Blocks.Num());
 }
 
 // Called every frame
