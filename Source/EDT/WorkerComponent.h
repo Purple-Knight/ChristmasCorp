@@ -3,12 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "ScheduleBlock.h"
-#include "Worker.generated.h"
+#include "Runtime/Engine/Classes/Components/ActorComponent.h"
+#include "WorkerComponent.generated.h"
 
-UCLASS(Blueprintable)
-class EDT_API AWorker : public AActor
+UCLASS(BlueprintType, Blueprintable, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+class EDT_API UWorkerComponent : public UActorComponent
 {
 	GENERATED_BODY()
 	
@@ -17,14 +17,10 @@ public:
 	TArray<TObjectPtr<UScheduleBlock>> Blocks;
 
 	// Sets default values for this actor's properties
-	AWorker();
+	UWorkerComponent();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 };
