@@ -3,13 +3,48 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ScheduleAction.generated.h"
 
-/**
- * 
- */
-class EDT_API ScheduleAction
+class UWorkerComponent;
+
+UCLASS()
+class EDT_API UScheduleAction : public UObject
 {
+	GENERATED_BODY()
+
 public:
-	ScheduleAction();
-	~ScheduleAction();
+	UScheduleAction();
+
+	virtual void DoAction(TObjectPtr<UWorkerComponent> Actor) PURE_VIRTUAL(UWorkerComponent::DoAction);
+};
+
+
+UCLASS(meta = (DisplayName = "Action Walk To A"))
+class UScheduleActionWalkToA : public UScheduleAction
+{
+	GENERATED_BODY()
+
+public:
+	virtual void DoAction(TObjectPtr<UWorkerComponent> Actor) override;
+	
+};
+
+UCLASS(meta = (DisplayName = "Action Walk To B"))
+class UScheduleActionWalkToB : public UScheduleAction
+{
+	GENERATED_BODY()
+
+public:
+	virtual void DoAction(TObjectPtr<UWorkerComponent>  Actor) override;
+
+};
+
+UCLASS(meta = (DisplayName = "Action Work"))
+class UScheduleActionWork : public UScheduleAction
+{
+	GENERATED_BODY()
+
+public:
+	virtual void DoAction(TObjectPtr<UWorkerComponent>  Actor) override;
+
 };

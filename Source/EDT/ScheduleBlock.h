@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ScheduleAction.h"
 #include "ScheduleBlock.generated.h"
 
 UCLASS(Blueprintable)
@@ -16,4 +17,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool Movable = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UScheduleAction> Action;
 };
