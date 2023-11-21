@@ -11,7 +11,7 @@ UScheduleAction::UScheduleAction()
 void UScheduleAction::DoAction(TObjectPtr<UWorkerComponent> Actor)
 {
 	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("NotGood"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("I'm gona cry :("));
 }
 
 

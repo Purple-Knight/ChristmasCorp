@@ -16,11 +16,14 @@ public:
 	FString DisplayName = TEXT("NotAName");
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FColor Color = FColor::White;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BlockDuration = 5.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool Movable = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UScheduleAction> Action;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float BlockDuration = 5.0f;
 };
