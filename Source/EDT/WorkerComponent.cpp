@@ -26,13 +26,7 @@ void UWorkerComponent::BeginPlay()
 	//Init Actions
 	for (const TObjectPtr<UScheduleBlock> Block : Blocks)
 	{
-		Actions.Add(NewObject<UScheduleAction>(Block->Action));
+		Actions.Add(NewObject<UScheduleAction>(Block, Block->Action));
 	}
-
-	//for (const TObjectPtr<UScheduleAction> Action : Actions)
-	//{
-	//	if (GEngine)
-	//		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Magenta, (TEXT("Action")));
-	//}
 }
 
