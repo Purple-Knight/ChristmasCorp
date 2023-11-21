@@ -20,4 +20,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UScheduleAction> Action;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BlockDuration = 5.0f;
 };

@@ -15,7 +15,7 @@ class EDT_API UScheduleAction : public UObject
 public:
 	UScheduleAction();
 
-	virtual void DoAction(TObjectPtr<UWorkerComponent> Actor) PURE_VIRTUAL(UWorkerComponent::DoAction);
+	virtual void DoAction(TObjectPtr<UWorkerComponent> Actor) /*PURE_VIRTUAL(UWorkerComponent::DoAction)*/;
 };
 
 

@@ -13,6 +13,8 @@ UWorkerComponent::UWorkerComponent()
 
 void UWorkerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
+	//if (GEngine)
+	//	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("" + Cast<UScheduleActionWork>(Blocks[CurrentBlockIndex])->IsValidLowLevel()));
 	//Actions[CurrentBlockIndex]->DoAction(this);
 }
 
