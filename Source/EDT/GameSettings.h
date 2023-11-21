@@ -16,6 +16,4 @@ class EDT_API UGameSettings : public UDeveloperSettings
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(Config, EditAnywhere, BlueprintReadOnly, Category = "Schedule")
-	TSoftObjectPtr<UDataTable> BlockList = nullptr;
 };
