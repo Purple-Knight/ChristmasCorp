@@ -12,7 +12,7 @@ AWorkerCharacter::AWorkerCharacter()
 
 void AWorkerCharacter::Tick(float DeltaTime)
 {
-	
+	Super::Tick(DeltaTime);
 }
 
 // Called when the game starts or when spawned
