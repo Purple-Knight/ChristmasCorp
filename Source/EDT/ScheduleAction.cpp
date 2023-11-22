@@ -3,18 +3,6 @@
 
 #include "ScheduleAction.h"
 
-
-UScheduleAction::UScheduleAction()
-{
-}
-
-void UScheduleAction::DoAction(TObjectPtr<UWorkerComponent> Actor)
-{
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("NotGood"));
-}
-
-
 void UScheduleActionWalkToA::DoAction(TObjectPtr<UWorkerComponent> Actor) 
 {
 	if (GEngine)

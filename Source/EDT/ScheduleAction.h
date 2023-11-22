@@ -7,15 +7,15 @@
 
 class UWorkerComponent;
 
-UCLASS()
+UCLASS(Blueprintable)
 class EDT_API UScheduleAction : public UObject
 {
 	GENERATED_BODY()
 
 public:
-	UScheduleAction();
+	UScheduleAction() = default;
 
-	virtual void DoAction(TObjectPtr<UWorkerComponent> Actor) /*PURE_VIRTUAL(UWorkerComponent::DoAction)*/;
+	virtual void DoAction(TObjectPtr<UWorkerComponent> Actor) PURE_VIRTUAL(UWorkerComponent::DoAction);
 };
 
 
