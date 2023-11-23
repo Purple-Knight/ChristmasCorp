@@ -21,10 +21,20 @@ void AWorkerCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	//Init Actions
-	for (const TObjectPtr<UScheduleBlock> Block : Blocks)
+	for (const TObjectPtr<UScheduleBlock>& Block : Blocks)
 	{
 		Actions.Add(NewObject<UScheduleAction>(Block, Block->Action));
 	}
 
+}
+
+void AWorkerCharacter::UpdateBlockList(const TArray<UScheduleBlock*>& NewBlocks)
+{
+	Blocks.Reset(NewBlocks.Num());
+
+	for (int i = 0; i < NewBlocks.Num(); i++)
+	{
+		Blocks[i] = NewBlocks[i];
+	}
 }
 
