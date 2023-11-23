@@ -21,7 +21,7 @@ void AWorkerCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	//Init Actions
-	for (const TObjectPtr<UScheduleBlock> Block : Blocks)
+	for (const TObjectPtr<UScheduleBlock>& Block : Blocks)
 	{
 		Actions.Add(NewObject<UScheduleAction>(Block, Block->Action));
 	}
