@@ -28,8 +28,10 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-protected:
+	UFUNCTION(BlueprintCallable)
+	void UpdateBlockList(const TArray<UScheduleBlock*>& NewBlocks);
 
+protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

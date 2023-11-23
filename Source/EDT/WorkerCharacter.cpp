@@ -28,3 +28,13 @@ void AWorkerCharacter::BeginPlay()
 
 }
 
+void AWorkerCharacter::UpdateBlockList(const TArray<UScheduleBlock*>& NewBlocks)
+{
+	Blocks.Reset(NewBlocks.Num());
+
+	for (int i = 0; i < NewBlocks.Num(); i++)
+	{
+		Blocks[i] = NewBlocks[i];
+	}
+}
+
