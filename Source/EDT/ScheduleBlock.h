@@ -3,27 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "ScheduleAction.h"
 #include "ScheduleBlock.generated.h"
 
 UCLASS(Blueprintable)
-class EDT_API AScheduleBlock : public AActor
+class EDT_API UScheduleBlock : public UDataAsset
 {
 	GENERATED_BODY()
 
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString name; 
-	
-public:	
-	// Sets default values for this actor's properties
-	AScheduleBlock();
+	FString DisplayName = TEXT("NotAName");
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FColor Color = FColor::White;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BlockDuration = 5.0f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool Movable = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UScheduleAction> Action;
 };

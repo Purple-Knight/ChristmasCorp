@@ -2,26 +2,3 @@
 
 
 #include "ScheduleBlock.h"
-
-// Sets default values
-AScheduleBlock::AScheduleBlock()
-{
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
-}
-
-// Called when the game starts or when spawned
-void AScheduleBlock::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void AScheduleBlock::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
