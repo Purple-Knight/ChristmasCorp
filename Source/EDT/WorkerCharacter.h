@@ -15,6 +15,9 @@ class EDT_API AWorkerCharacter : public ACharacter
 	GENERATED_BODY()
 	
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsTimelineStarted = false;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 CurrentBlockIndex = 0;
 
@@ -28,8 +31,8 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintCallable)
-	void UpdateBlockList(const TArray<UScheduleBlock*>& NewBlocks);
+	UFUNCTION(BlueprintImplementableEvent)
+	void RunBlock(const UScheduleBlock* Block);
 
 protected:
 	// Called when the game starts or when spawned
