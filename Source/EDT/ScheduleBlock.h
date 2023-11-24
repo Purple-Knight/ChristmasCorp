@@ -22,7 +22,7 @@ public:
 	bool Movable = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float BlockActionDuration = 5.0f;
+	float BlockDuration = 5.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UScheduleAction> Action;
