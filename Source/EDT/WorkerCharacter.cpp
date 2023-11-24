@@ -18,14 +18,19 @@ void AWorkerCharacter::Tick(float DeltaTime)
 	{
 		IsBlockRunning = true;
 		RunBlock(Blocks[CurrentBlockIndex]);
-
-		CurrentBlockIndex++;
-		if(CurrentBlockIndex >= Blocks.Num())
-		{
-			CurrentBlockIndex = 0;
-		}
+		//RunTimerOfCurrentBlock();
 	}
 
+	if (IsTimerRunning)
+	{
+		Timer += DeltaTime;
+		if (Timer >= Blocks[CurrentBlockIndex]->BlockDuration)
+		{
+			if (GEngine)
+				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Emerald, FString::Format(TEXT("Block {0}, end !"), {Blocks[CurrentBlockIndex]->DisplayName}));
+			//BlockActionEnded();
+		}
+	}
 }
 
 // Called when the game starts or when spawned
@@ -34,13 +39,26 @@ void AWorkerCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	//Init Actions
-	for (const TObjectPtr<UScheduleBlock>& Block : Blocks)
-	{
-		Actions.Add(NewObject<UScheduleAction>(Block, Block->Action));
-	}
+	//for (const TObjectPtr<UScheduleBlock>& Block : Blocks)
+	//{
+	//	Actions.Add(NewObject<UScheduleAction>(Block, Block->Action));
+	//}
 }
 
 void AWorkerCharacter::BlockActionEnded()
 {
 	IsBlockRunning = false;
+	Timer = 0.0f;
+
+	CurrentBlockIndex++;
+	if (CurrentBlockIndex >= Blocks.Num())
+	{
+		CurrentBlockIndex = 0;
+	}
 }
+
+void AWorkerCharacter::RunTimerOfCurrentBlock()
+{
+	IsTimerRunning = true;
+}
+

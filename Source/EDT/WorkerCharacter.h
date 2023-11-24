@@ -37,11 +37,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void BlockActionEnded();
 
+	UFUNCTION(BlueprintCallable)
+	void RunTimerOfCurrentBlock();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
 	bool IsBlockRunning = false;
+	bool IsTimerRunning = false;
+
+	float Timer = 0.0f;
+
 
 };
