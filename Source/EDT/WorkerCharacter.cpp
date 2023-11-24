@@ -13,6 +13,19 @@ AWorkerCharacter::AWorkerCharacter()
 void AWorkerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (IsTimelineStarted && !IsBlockRunning)
+	{
+		IsBlockRunning = true;
+		RunBlock(Blocks[CurrentBlockIndex]);
+
+		CurrentBlockIndex++;
+		if(CurrentBlockIndex >= Blocks.Num())
+		{
+			CurrentBlockIndex = 0;
+		}
+	}
+
 }
 
 // Called when the game starts or when spawned
@@ -25,5 +38,9 @@ void AWorkerCharacter::BeginPlay()
 	{
 		Actions.Add(NewObject<UScheduleAction>(Block, Block->Action));
 	}
+}
 
+void AWorkerCharacter::BlockActionEnded()
+{
+	IsBlockRunning = false;
 }

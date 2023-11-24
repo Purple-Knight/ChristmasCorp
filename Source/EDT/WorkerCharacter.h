@@ -34,8 +34,14 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void RunBlock(const UScheduleBlock* Block);
 
+	UFUNCTION(BlueprintCallable)
+	void BlockActionEnded();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+private:
+	bool IsBlockRunning = false;
 
 };
