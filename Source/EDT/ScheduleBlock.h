@@ -12,21 +12,18 @@ class EDT_API UScheduleBlock : public UDataAsset
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString DisplayName = TEXT("NotAName");
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FColor Color = FColor::White;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
-	bool Movable = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float BlockDuration = 5.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UScheduleAction> Action;
+	bool Movable = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dev", meta = (ClampMin = 0))
-	int Index = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UScheduleAction> Action;
 };
