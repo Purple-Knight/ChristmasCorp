@@ -27,6 +27,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UScheduleAction> Action;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Develloper", meta = (ClampMin = 0))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dev", meta = (ClampMin = 0))
 	int Index = 0;
 };

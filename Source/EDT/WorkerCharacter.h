@@ -15,9 +15,6 @@ class EDT_API AWorkerCharacter : public ACharacter
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool IsTimelineStarted = false;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 CurrentBlockIndex = 0;
 
@@ -40,6 +37,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RunTimerOfCurrentBlock();
 
+	UFUNCTION(BlueprintCallable)
+	void StartTimeline();
+
+	UFUNCTION(BlueprintCallable)
+	void StopTimeline();
+
+	UFUNCTION(BlueprintCallable)
+	void ResumeTimeline();
+
+	UFUNCTION(BlueprintCallable)
+	void ResetTimeline();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -47,6 +56,7 @@ protected:
 private:
 	bool IsBlockRunning = false;
 	bool IsTimerRunning = false;
+	bool IsTimelineStarted = false;
 
 	float Timer = 0.0f;
 

@@ -26,8 +26,8 @@ void AWorkerCharacter::Tick(float DeltaTime)
 		Timer += DeltaTime;
 		if (Timer >= Blocks[CurrentBlockIndex]->BlockDuration)
 		{
-			if (GEngine)
-				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Emerald, FString::Format(TEXT("Block {0}, end !"), {Blocks[CurrentBlockIndex]->DisplayName}));
+			//if (GEngine)
+			//	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Emerald, FString::Format(TEXT("Block {0}, end !"), {Blocks[CurrentBlockIndex]->DisplayName}));
 			//BlockActionEnded();
 		}
 	}
@@ -38,11 +38,10 @@ void AWorkerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//Init Actions
-	//for (const TObjectPtr<UScheduleBlock>& Block : Blocks)
-	//{
-	//	Actions.Add(NewObject<UScheduleAction>(Block, Block->Action));
-	//}
+	for (int i = 0; i < Blocks.Num(); i++)
+	{
+		Blocks[i]->Index = i;
+	}
 }
 
 void AWorkerCharacter::BlockActionEnded()
@@ -60,5 +59,32 @@ void AWorkerCharacter::BlockActionEnded()
 void AWorkerCharacter::RunTimerOfCurrentBlock()
 {
 	IsTimerRunning = true;
+}
+
+void AWorkerCharacter::StartTimeline()
+{
+	IsTimelineStarted = true;
+}
+
+void AWorkerCharacter::StopTimeline()
+{
+	IsTimelineStarted = false;
+	IsTimerRunning = false;
+}
+
+void AWorkerCharacter::ResumeTimeline()
+{
+	IsTimelineStarted = true;
+	IsTimerRunning = true;
+}
+
+
+void AWorkerCharacter::ResetTimeline()
+{
+	IsTimelineStarted = false;
+	IsBlockRunning = false;
+	IsTimerRunning = false;
+	Timer = 0.0f;
+	CurrentBlockIndex = 0;
 }
 
