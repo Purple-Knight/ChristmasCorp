@@ -28,11 +28,37 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void RunBlock(const UScheduleBlock* Block);
+
 	UFUNCTION(BlueprintCallable)
-	void UpdateBlockList(const TArray<UScheduleBlock*>& NewBlocks);
+	void BlockActionEnded();
+
+	UFUNCTION(BlueprintCallable)
+	void RunTimerOfCurrentBlock();
+
+	UFUNCTION(BlueprintCallable)
+	void StartTimeline();
+
+	UFUNCTION(BlueprintCallable)
+	void StopTimeline();
+
+	UFUNCTION(BlueprintCallable)
+	void ResumeTimeline();
+
+	UFUNCTION(BlueprintCallable)
+	void ResetTimeline();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+private:
+	bool IsBlockRunning = false;
+	bool IsTimerRunning = false;
+	bool IsTimelineStarted = false;
+
+	float Timer = 0.0f;
+
 
 };
