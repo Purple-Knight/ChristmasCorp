@@ -18,6 +18,9 @@ class EDT_API AWorkerCharacter : public ACharacter
 	
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool bInteract = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float CurrentBlockCompletion = 0.0f;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)

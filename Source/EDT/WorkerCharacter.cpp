@@ -27,11 +27,14 @@ void AWorkerCharacter::Tick(float DeltaTime)
 		Timer += DeltaTime;
 		CurrentBlockCompletion = FMath::GetMappedRangeValueClamped<float>(UE::Math::TVector2<float>(0.0f, Blocks[CurrentBlockIndex]->BlockDuration), UE::Math::TVector2<float>(0.0f, 1.0f), Timer);
 
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Emerald, FString::Format(TEXT("CurrentBlockCompletion : {0}"), { CurrentBlockCompletion }));
+
 		if (Timer >= Blocks[CurrentBlockIndex]->BlockDuration)
 		{
 			BlockActionEnded();
 			if (GEngine)
-				GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Emerald, FString::Format(TEXT("CurrentBlockCompletion : {0}"), { CurrentBlockCompletion }));
+				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Magenta, TEXT("CurrentBlockEnded"));
 		}
 	}
 }
@@ -40,11 +43,6 @@ void AWorkerCharacter::Tick(float DeltaTime)
 void AWorkerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	for (int i = 0; i < Blocks.Num(); i++)
-	{
-		Blocks[i]->Index = i;
-	}
 
 	if (!AIController)
 	{
@@ -55,6 +53,7 @@ void AWorkerCharacter::BeginPlay()
 
 void AWorkerCharacter::BlockActionEnded()
 {
+	bInteract = false;
 	bBlockRunning = false;
 	bTimerRunning = false;
 	Timer = 0.0f;
@@ -68,6 +67,7 @@ void AWorkerCharacter::BlockActionEnded()
 
 void AWorkerCharacter::RunTimerOfCurrentBlock()
 {
+	bInteract = true;
 	bTimerRunning = true;
 }
 
@@ -87,7 +87,6 @@ void AWorkerCharacter::ResumeTimeline()
 	bTimelineStarted = true;
 	bTimerRunning = true;
 }
-
 
 void AWorkerCharacter::ResetTimeline()
 {
@@ -140,4 +139,3 @@ void AWorkerCharacter::OnMoveCompleted(FAIRequestID ID, EPathFollowingResult::Ty
 	RunTimerOfCurrentBlock();
 	UE_LOG(LogTemp, Error, TEXT("Worker At Goal"));
 }
-
