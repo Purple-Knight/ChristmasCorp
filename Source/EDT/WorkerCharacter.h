@@ -4,12 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Navigation/PathFollowingComponent.h"
 #include "WorkerCharacter.generated.h"
 
 class UScheduleBlock;
-class UScheduleAction;
+class AAIController;
+struct FAIRequestID;
 
-UCLASS(BlueprintType, Blueprintable, ClassGroup = "AI Controller")
+UCLASS(BlueprintType, Blueprintable, ClassGroup = "AI Character")
 class EDT_API AWorkerCharacter : public ACharacter
 {
 	GENERATED_BODY()
@@ -24,15 +26,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<TObjectPtr<UScheduleBlock>> Blocks;
 
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	//TArray<TObjectPtr<UScheduleAction>> Actions;
-
 	AWorkerCharacter();
 
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void RunBlock(const UScheduleBlock* Block);
+	//UFUNCTION(BlueprintImplementableEvent)
+	//void RunBlock(const UScheduleBlock* Block);
 
 	UFUNCTION(BlueprintCallable)
 	void BlockActionEnded();
@@ -53,15 +52,25 @@ public:
 	void ResetTimeline();
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AcceptanceRadius = 25.0f;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
-	bool IsBlockRunning = false;
-	bool IsTimerRunning = false;
-	bool IsTimelineStarted = false;
+	bool bBlockRunning = false;
+	bool bTimerRunning = false;
+	bool bTimelineStarted = false;
 
+	//IA / Move
+	bool bStopOnOverlap = true;
 	float Timer = 0.0f;
+	TObjectPtr<AAIController> AIController;
 
+	void RunBlock(const UScheduleBlock& Block);
+
+	UFUNCTION()
+	void OnMoveCompleted(FAIRequestID ID, EPathFollowingResult::Type Type);
 
 };

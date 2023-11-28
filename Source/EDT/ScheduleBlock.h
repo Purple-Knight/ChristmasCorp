@@ -22,6 +22,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float BlockDuration = 5.0f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector LocationOfTask;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dev", meta = (ClampMin = 0))
 	int Index = 0;
