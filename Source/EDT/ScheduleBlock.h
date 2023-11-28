@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ScheduleAction.h"
 #include "ScheduleBlock.generated.h"
 
 UCLASS(Blueprintable)
@@ -23,9 +22,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float BlockDuration = 5.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<UScheduleAction> Action;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dev", meta = (ClampMin = 0))
 	int Index = 0;

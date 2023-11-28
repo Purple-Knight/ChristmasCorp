@@ -14,22 +14,23 @@ void AWorkerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	//if (GEngine)
+	//	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Emerald, FString::Format(TEXT("BlockRunning : {0}"), { IsBlockRunning }));
+
+
 	if (IsTimelineStarted && !IsBlockRunning)
 	{
-		IsBlockRunning = true;
 		RunBlock(Blocks[CurrentBlockIndex]);
+		IsBlockRunning = true;
 		//RunTimerOfCurrentBlock();
 	}
 
-	if (IsTimerRunning)
+	if (IsTimerRunning && IsBlockRunning)
 	{
 		Timer += DeltaTime;
-		if (Timer >= Blocks[CurrentBlockIndex]->BlockDuration)
-		{
-			//if (GEngine)
-			//	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Emerald, FString::Format(TEXT("Block {0}, end !"), {Blocks[CurrentBlockIndex]->DisplayName}));
-			//BlockActionEnded();
-		}
+		CurrentBlockCompletion = FMath::GetMappedRangeValueClamped<float>(UE::Math::TVector2<float>(0.0f, Blocks[CurrentBlockIndex]->BlockDuration), UE::Math::TVector2<float>(0.0f, 1.0f), Timer);
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Emerald, FString::Format(TEXT("CurrentBlockCompletion : {0}"), { CurrentBlockCompletion }));
 	}
 }
 

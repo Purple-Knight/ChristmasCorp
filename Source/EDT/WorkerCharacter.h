@@ -16,13 +16,16 @@ class EDT_API AWorkerCharacter : public ACharacter
 	
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	float CurrentBlockCompletion = 0.0f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 CurrentBlockIndex = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<TObjectPtr<UScheduleBlock>> Blocks;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TArray<TObjectPtr<UScheduleAction>> Actions;
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	//TArray<TObjectPtr<UScheduleAction>> Actions;
 
 	AWorkerCharacter();
 
