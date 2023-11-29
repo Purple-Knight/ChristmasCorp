@@ -51,6 +51,12 @@ void AWorkerCharacter::BeginPlay()
 		AIController = GetController<AAIController>();
 		AIController->ReceiveMoveCompleted.AddDynamic(this, &AWorkerCharacter::OnMoveCompleted);
 	}
+
+	UGameplayStatics::GetAllActorsOfClass(this, AInteractable::StaticClass(), AllInteractablesActors);
+	if (AllInteractablesActors.Num() == 0)
+	{
+		UE_LOG(LogTemp, Fatal, TEXT("No Actor To Interact, Should Not Append !"));
+	}
 }
 
 void AWorkerCharacter::BlockActionEnded()
@@ -107,14 +113,15 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 		AIController->ReceiveMoveCompleted.AddDynamic(this, &AWorkerCharacter::OnMoveCompleted);
 	}
 
-
-	UGameplayStatics::GetAllActorsOfClassWithTag(this, AInteractable::StaticClass(), Block.ActorToInteract.GetTagName(), AllInteractablesActors);
-	if (AllInteractablesActors.Num() == 0)
+	//Find Actor to Interact with
+	for (int i = 0; i < AllInteractablesActors.Num(); i++)
 	{
-		UE_LOG(LogTemp, Fatal, TEXT("No Actor To Interact, Should Not Append !"))
+		AInteractable* actor = Cast<AInteractable>(AllInteractablesActors[i]);
+		if (actor->InteractIndex == Block.ActorToInteractIndex)
+		{
+			CurrentActorToUse = actor;
+		}
 	}
-
-	CurrentActorToUse = Cast<AInteractable>(AllInteractablesActors[0]);
 
 	FAIMoveRequest MoveReq;
 	MoveReq.SetUsePathfinding(true);

@@ -15,6 +15,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bInteract = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = 0))
+	int InteractIndex = 0;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector InteractPosition = FVector(0.0f, 0.0f, 0.0f);
 

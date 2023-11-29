@@ -24,6 +24,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float BlockDuration = 5.0f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayTag ActorToInteract;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (ClampMin = 0))
+	int ActorToInteractIndex;
 };
