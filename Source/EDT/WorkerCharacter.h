@@ -7,6 +7,7 @@
 #include "Navigation/PathFollowingComponent.h"
 #include "WorkerCharacter.generated.h"
 
+class AInteractable;
 class UScheduleBlock;
 class AAIController;
 struct FAIRequestID;
@@ -24,6 +25,9 @@ public:
 	float CurrentBlockCompletion = 0.0f;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<AInteractable> CurrentActorToUse;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 CurrentBlockIndex = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -32,9 +36,6 @@ public:
 	AWorkerCharacter();
 
 	virtual void Tick(float DeltaTime) override;
-
-	//UFUNCTION(BlueprintImplementableEvent)
-	//void RunBlock(const UScheduleBlock* Block);
 
 	UFUNCTION(BlueprintCallable)
 	void BlockActionEnded();
@@ -65,6 +66,9 @@ private:
 	bool bBlockRunning = false;
 	bool bTimerRunning = false;
 	bool bTimelineStarted = false;
+
+	//Interact
+	TArray<AActor*> AllInteractablesActors;
 
 	//IA / Move
 	bool bStopOnOverlap = true;

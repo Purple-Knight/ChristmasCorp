@@ -4,7 +4,9 @@
 #include "WorkerCharacter.h"
 #include "ScheduleBlock.h"
 #include "AIController.h"
+#include "Interactable.h"
 #include "Blueprint/AIAsyncTaskBlueprintProxy.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AWorkerCharacter::AWorkerCharacter()
@@ -105,11 +107,20 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 		AIController->ReceiveMoveCompleted.AddDynamic(this, &AWorkerCharacter::OnMoveCompleted);
 	}
 
+
+	UGameplayStatics::GetAllActorsOfClassWithTag(this, AInteractable::StaticClass(), Block.ActorToInteract.GetTagName(), AllInteractablesActors);
+	if (AllInteractablesActors.Num() == 0)
+	{
+		UE_LOG(LogTemp, Fatal, TEXT("No Actor To Interact, Should Not Append !"))
+	}
+
+	CurrentActorToUse = Cast<AInteractable>(AllInteractablesActors[0]);
+
 	FAIMoveRequest MoveReq;
 	MoveReq.SetUsePathfinding(true);
 	MoveReq.SetAcceptanceRadius(AcceptanceRadius);
 	MoveReq.SetReachTestIncludesAgentRadius(bStopOnOverlap);
-	MoveReq.SetGoalLocation(Block.LocationOfTask);
+	MoveReq.SetGoalLocation(CurrentActorToUse->InteractPosition);
 	MoveReq.SetNavigationFilter(AIController->GetDefaultNavigationFilterClass());
 
 	FPathFollowingRequestResult ResultData = AIController->MoveTo(MoveReq);
