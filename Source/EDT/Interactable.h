@@ -24,6 +24,9 @@ public:
 	// Sets default values for this actor's properties
 	AInteractable();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void Interact(float TimeToInteract = 0.0f);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

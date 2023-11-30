@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "WorkerCharacter.h"
-#include "ScheduleBlock.h"
 #include "AIController.h"
-#include "Interactable.h"
 #include "Blueprint/AIAsyncTaskBlueprintProxy.h"
+#include "Interactable.h"
 #include "Kismet/GameplayStatics.h"
+#include "ScheduleBlock.h"
+#include "WorkerCharacter.h"
 
 // Sets default values
 AWorkerCharacter::AWorkerCharacter()
@@ -29,14 +29,9 @@ void AWorkerCharacter::Tick(float DeltaTime)
 		Timer += DeltaTime;
 		CurrentBlockCompletion = FMath::GetMappedRangeValueClamped<float>(UE::Math::TVector2<float>(0.0f, Blocks[CurrentBlockIndex]->BlockDuration), UE::Math::TVector2<float>(0.0f, 1.0f), Timer);
 
-		if (GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Emerald, FString::Format(TEXT("CurrentBlockCompletion : {0}"), { CurrentBlockCompletion }));
-
 		if (Timer >= Blocks[CurrentBlockIndex]->BlockDuration)
 		{
 			BlockActionEnded();
-			if (GEngine)
-				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Magenta, TEXT("CurrentBlockEnded"));
 		}
 	}
 }
@@ -123,6 +118,7 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 		}
 	}
 
+	//Move To Actor
 	FAIMoveRequest MoveReq;
 	MoveReq.SetUsePathfinding(true);
 	MoveReq.SetAcceptanceRadius(AcceptanceRadius);
