@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "WorkerCharacter.h"
 #include "AIController.h"
 #include "Blueprint/AIAsyncTaskBlueprintProxy.h"
 #include "Interactable.h"
 #include "Kismet/GameplayStatics.h"
 #include "ScheduleBlock.h"
-#include "WorkerCharacter.h"
 
 // Sets default values
 AWorkerCharacter::AWorkerCharacter()
@@ -116,6 +116,12 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 		{
 			CurrentActorToUse = actor;
 		}
+	}
+
+	if (CurrentActorToUse == nullptr)
+	{
+		ResetTimeline();
+		return;
 	}
 
 	//Move To Actor
