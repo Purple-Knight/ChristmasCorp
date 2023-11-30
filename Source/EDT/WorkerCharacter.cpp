@@ -50,7 +50,7 @@ void AWorkerCharacter::BeginPlay()
 	UGameplayStatics::GetAllActorsOfClass(this, AInteractable::StaticClass(), AllInteractablesActors);
 	if (AllInteractablesActors.Num() == 0)
 	{
-		UE_LOG(LogTemp, Fatal, TEXT("No Actor To Interact, Should Not Append !"));
+		UE_LOG(LogTemp, Error, TEXT("No Actor To Interact, Should Not Append !"));
 	}
 }
 
@@ -121,6 +121,7 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 	if (CurrentActorToUse == nullptr)
 	{
 		ResetTimeline();
+		UE_LOG(LogTemp, Error, TEXT("No Actor To Interact, Should Not Append !"));
 		return;
 	}
 
