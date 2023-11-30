@@ -60,6 +60,7 @@ void AWorkerCharacter::BlockActionEnded()
 	bBlockRunning = false;
 	bTimerRunning = false;
 	Timer = 0.0f;
+	CurrentBlockCompletion = 0.0f;
 
 	CurrentBlockIndex++;
 	if (CurrentBlockIndex >= Blocks.Num())
@@ -98,6 +99,7 @@ void AWorkerCharacter::ResetTimeline()
 	bTimerRunning = false;
 	Timer = 0.0f;
 	CurrentBlockIndex = 0;
+	CurrentBlockCompletion = 0.0f;
 }
 
 void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
