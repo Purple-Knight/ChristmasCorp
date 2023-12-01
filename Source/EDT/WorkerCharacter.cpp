@@ -31,7 +31,7 @@ void AWorkerCharacter::Tick(float DeltaTime)
 
 		if (Timer >= Blocks[CurrentBlockIndex]->BlockDuration)
 		{
-			BlockActionEnded();
+			EndCurrentBlock();
 		}
 	}
 }
@@ -54,13 +54,14 @@ void AWorkerCharacter::BeginPlay()
 	}
 }
 
-void AWorkerCharacter::BlockActionEnded()
+void AWorkerCharacter::EndCurrentBlock()
 {
 	bInteract = false;
 	bBlockRunning = false;
 	bTimerRunning = false;
 	Timer = 0.0f;
 	CurrentBlockCompletion = 0.0f;
+	CurrentActorToUse->bInteract = false;
 
 	CurrentBlockIndex++;
 	if (CurrentBlockIndex >= Blocks.Num())
@@ -69,10 +70,11 @@ void AWorkerCharacter::BlockActionEnded()
 	}
 }
 
-void AWorkerCharacter::RunTimerOfCurrentBlock()
+void AWorkerCharacter::StartActionOfCurrentBlock()
 {
 	bInteract = true;
 	bTimerRunning = true;
+	CurrentActorToUse->bInteract = true;
 }
 
 void AWorkerCharacter::StartTimeline()
@@ -143,7 +145,7 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 		break;
 
 	case EPathFollowingRequestResult::AlreadyAtGoal:
-		RunTimerOfCurrentBlock();
+		StartActionOfCurrentBlock();
 		UE_LOG(LogTemp, Error, TEXT("Worker Already At Goal"));
 		break;
 
@@ -159,6 +161,6 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 
 void AWorkerCharacter::OnMoveCompleted(FAIRequestID ID, EPathFollowingResult::Type Type)
 {
-	RunTimerOfCurrentBlock();
+	StartActionOfCurrentBlock();
 	UE_LOG(LogTemp, Error, TEXT("Worker At Goal"));
 }
