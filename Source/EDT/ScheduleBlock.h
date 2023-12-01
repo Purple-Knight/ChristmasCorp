@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameplayTags.h"
 #include "ScheduleBlock.generated.h"
 
 UCLASS(Blueprintable)
