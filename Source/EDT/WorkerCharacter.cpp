@@ -68,6 +68,7 @@ void AWorkerCharacter::EndCurrentBlock()
 	{
 		CurrentBlockIndex = 0;
 	}
+	UE_LOG(LogTemp, Log, TEXT("Current Action Ended"));
 }
 
 void AWorkerCharacter::StartActionOfCurrentBlock()
@@ -75,11 +76,13 @@ void AWorkerCharacter::StartActionOfCurrentBlock()
 	bInteract = true;
 	bTimerRunning = true;
 	CurrentActorToUse->bInteract = true;
+	UE_LOG(LogTemp, Log, TEXT("Start Block Action"));
 }
 
 void AWorkerCharacter::StartTimeline()
 {
 	bTimelineStarted = true;
+	UE_LOG(LogTemp, Log, TEXT("Start Timeline"));
 }
 
 void AWorkerCharacter::StopTimeline()
@@ -102,6 +105,7 @@ void AWorkerCharacter::ResetTimeline()
 	Timer = 0.0f;
 	CurrentBlockIndex = 0;
 	CurrentBlockCompletion = 0.0f;
+	UE_LOG(LogTemp, Log, TEXT("Reset Timeline"));
 }
 
 void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
@@ -141,12 +145,12 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 	switch (ResultData.Code)
 	{
 	case EPathFollowingRequestResult::RequestSuccessful:
-		UE_LOG(LogTemp, Error, TEXT("Worker Move To Goal"));
+		UE_LOG(LogTemp, Log, TEXT("Worker Move To Goal"));
 		break;
 
 	case EPathFollowingRequestResult::AlreadyAtGoal:
 		StartActionOfCurrentBlock();
-		UE_LOG(LogTemp, Error, TEXT("Worker Already At Goal"));
+		UE_LOG(LogTemp, Log, TEXT("Worker Already At Goal"));
 		break;
 
 	case EPathFollowingRequestResult::Failed:
@@ -162,5 +166,5 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 void AWorkerCharacter::OnMoveCompleted(FAIRequestID ID, EPathFollowingResult::Type Type)
 {
 	StartActionOfCurrentBlock();
-	UE_LOG(LogTemp, Error, TEXT("Worker At Goal"));
+	UE_LOG(LogTemp, Log, TEXT("Worker At Goal"));
 }
