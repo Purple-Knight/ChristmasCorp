@@ -31,7 +31,7 @@ void AWorkerCharacter::Tick(float DeltaTime)
 
 		if (Timer >= Blocks[CurrentBlockIndex]->BlockDuration)
 		{
-			BlockActionEnded();
+			EndCurrentBlock();
 		}
 	}
 }
@@ -54,30 +54,35 @@ void AWorkerCharacter::BeginPlay()
 	}
 }
 
-void AWorkerCharacter::BlockActionEnded()
+void AWorkerCharacter::EndCurrentBlock()
 {
 	bInteract = false;
 	bBlockRunning = false;
 	bTimerRunning = false;
 	Timer = 0.0f;
 	CurrentBlockCompletion = 0.0f;
+	CurrentActorToUse->bInteract = false;
 
 	CurrentBlockIndex++;
 	if (CurrentBlockIndex >= Blocks.Num())
 	{
 		CurrentBlockIndex = 0;
 	}
+	UE_LOG(LogTemp, Log, TEXT("Current Action Ended"));
 }
 
-void AWorkerCharacter::RunTimerOfCurrentBlock()
+void AWorkerCharacter::StartActionOfCurrentBlock()
 {
 	bInteract = true;
 	bTimerRunning = true;
+	CurrentActorToUse->bInteract = true;
+	UE_LOG(LogTemp, Log, TEXT("Start Block Action"));
 }
 
 void AWorkerCharacter::StartTimeline()
 {
 	bTimelineStarted = true;
+	UE_LOG(LogTemp, Log, TEXT("Start Timeline"));
 }
 
 void AWorkerCharacter::StopTimeline()
@@ -100,6 +105,7 @@ void AWorkerCharacter::ResetTimeline()
 	Timer = 0.0f;
 	CurrentBlockIndex = 0;
 	CurrentBlockCompletion = 0.0f;
+	UE_LOG(LogTemp, Log, TEXT("Reset Timeline"));
 }
 
 void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
@@ -139,12 +145,12 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 	switch (ResultData.Code)
 	{
 	case EPathFollowingRequestResult::RequestSuccessful:
-		UE_LOG(LogTemp, Error, TEXT("Worker Move To Goal"));
+		UE_LOG(LogTemp, Log, TEXT("Worker Move To Goal"));
 		break;
 
 	case EPathFollowingRequestResult::AlreadyAtGoal:
-		RunTimerOfCurrentBlock();
-		UE_LOG(LogTemp, Error, TEXT("Worker Already At Goal"));
+		StartActionOfCurrentBlock();
+		UE_LOG(LogTemp, Log, TEXT("Worker Already At Goal"));
 		break;
 
 	case EPathFollowingRequestResult::Failed:
@@ -159,6 +165,6 @@ void AWorkerCharacter::RunBlock(const UScheduleBlock& Block)
 
 void AWorkerCharacter::OnMoveCompleted(FAIRequestID ID, EPathFollowingResult::Type Type)
 {
-	RunTimerOfCurrentBlock();
-	UE_LOG(LogTemp, Error, TEXT("Worker At Goal"));
+	StartActionOfCurrentBlock();
+	UE_LOG(LogTemp, Log, TEXT("Worker At Goal"));
 }

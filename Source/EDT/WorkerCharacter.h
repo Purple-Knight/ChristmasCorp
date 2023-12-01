@@ -38,10 +38,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void BlockActionEnded();
+	void EndCurrentBlock();
 
 	UFUNCTION(BlueprintCallable)
-	void RunTimerOfCurrentBlock();
+	void StartActionOfCurrentBlock();
 
 	UFUNCTION(BlueprintCallable)
 	void StartTimeline();
